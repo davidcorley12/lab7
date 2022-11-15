@@ -4,7 +4,7 @@ const port = 4000
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-
+{/*Cross-Origin Resource Sharing allows us to post and get code between the server.js and the app.js*/}
 app.use(cors());
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -19,18 +19,24 @@ const mongoose = require('mongoose');
 
 main().catch(err => console.log(err));
 
+
+{/*establish connection between moongoose and server*/}
 async function main() {
     await mongoose.connect('mongodb+srv://admin:admin@admin.r2rppnm.mongodb.net/?retryWrites=true&w=majority');
 
     // use `await mongoose.connect('mongodb://user:password@localhost:27017/test');` if your database has auth enabled
 }
+
+{/*Creates the schema for the mongoose Database*/}
 const bookSchema = new mongoose.Schema({
     title: String,
     cover: String,
     author: String
 });
 
+{/* Names our collection, we name our collection books*/}
 const bookModel = mongoose.model('books', bookSchema);
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
